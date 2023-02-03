@@ -1,56 +1,37 @@
 const boxes = Array.from(document.getElementsByClassName('box'));
-const restartButton = document.querySelector('.restart-button');
-restartButton.addEventListener("click",function(){
-   location.reload()
+document.querySelector('.restart-button').addEventListener("click", function() {
+  location.reload()
 });
 let xTurn = true;
-
-const winningCombinations = [[0,1,2],[3,4,5],[6,7,8], //horizontal 
-                            [0,3,6],[1,4,7],[2,5,8],  //vertikal
-                            [0,4,8],[2,4,6]];         //diagonal
-
+const winningCombinations = [ [0, 1, 2],[3, 4, 5],[6, 7, 8], 
+                              [0, 3, 6],[1, 4, 7],[2, 5, 8],  
+                              [0, 4, 8],[2, 4, 6]];        
 boxes.forEach(box => {
-    box.addEventListener("click", function(){
-        if(!box.classList.contains("circle") && !box.classList.contains("cross")){
-            box.classList.add(xTurn ? "cross" : "circle");
-            if(checkWin() || checkDraw()){
-                showPopup();
-            }
-        changeTurn();
-        }   
-    })
+  box.addEventListener("click", function() {
+    if (!box.classList.contains("circle") && !box.classList.contains("cross")) {
+      box.classList.add(xTurn ? "cross" : "circle");
+       (checkWin() || checkDraw()) && showPopup();
+      changeTurn();
+    }
+  })
 });
 
-function showPopup(){
-document.querySelector('.popup-container').style.display = "flex";
-if(checkWin()){
-    document.querySelector('.endgame-message').textContent = xTurn ? "X hat gewonnen" : "O hat gewonnen";
-} else {
-    document.querySelector('.endgame-message').textContent = "unentschieden";
+function showPopup() {
+  document.querySelector('.popup-container').style.display = "flex";
+  document.querySelector('.endgame-message').textContent = checkWin() ? (xTurn ? "X hat gewonnen" : "O hat gewonnen") : ("unentschieden");
+ 
 }
 
-}
-function changeTurn(){
-    xTurn = !xTurn;
+function changeTurn() {
+  xTurn = !xTurn;
 }
 
-function checkDraw(){
-    boxes.forEach(box=> {
-         if(!box.classList.contains("circle") && !box.classList.contains("cross")){
-            return false;
-        }
-        return true;
-    });
+function checkDraw() {
+  return boxes.every(box => box.classList.contains("circle") || box.classList.contains("cross"));
 }
 
 function checkWin() {
-    let currentSymbol = xTurn ? "cross" : "circle";
-    let found = false;
-    for (let i = 0; i < winningCombinations.length; i++) {
-        if (winningCombinations[i].every(field => boxes[field].classList.contains(currentSymbol))) {
-            found = true;
-            break;
-        }
-    }
-    return found;
+  return winningCombinations.some(combination => 
+    combination.every(fieldOfCombination => 
+      boxes[fieldOfCombination].classList.contains(xTurn ? "cross" : "circle")));
 }
