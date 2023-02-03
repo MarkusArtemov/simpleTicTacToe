@@ -1,0 +1,107 @@
+*{
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.gameBoard{
+    display: grid;
+    grid-template-columns: repeat(3,25vmin);
+    grid-template-rows: repeat(3,25vmin);
+}
+
+.box{
+    width: 25vmin;
+    height: 25vmin;
+}
+
+.box:nth-child(n):not(:nth-child(3n)){
+    border-right: 2px solid black;
+}
+
+.box:nth-child(n):not(:nth-child(n+7)) {
+    border-bottom: 2px solid black;
+}
+
+.circle, .cross{
+    position: relative;
+    width: 25vmin;
+    height: 25vmin;
+}
+
+
+.circle:before,
+.circle:after {
+    content: "";
+    position: absolute;
+    width: 20vmin;
+    height: 20vmin;
+    border-radius: 50%;
+    background-color: black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.circle:after {
+    width: 18vmin;
+    height: 18vmin;
+    background-color: white;
+}
+
+.cross:before,
+.cross:after {
+    content: "";
+    position: absolute;
+    width: 25vmin;
+    height: 1vmin;
+    background-color: rgb(0, 0, 0);
+    top: 50%;
+    transform: rotate(45deg);
+}
+
+.cross:after {
+    transform: rotate(-45deg);
+}
+
+.popup-container{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.popup{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15vmin;
+    position: absolute;
+    height: 50vmin;
+    width: 50vmin;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid black;
+    font-size: 5vmin;
+}
+
+.restart-button{
+    padding: 2vmin 5vmin;
+    background-color: rgb(96, 96, 179);
+    color: white;
+    border-radius: 7px;
+    border: none;
+    font-size: 5vmin;
+}
