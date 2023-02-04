@@ -9,13 +9,14 @@ body{
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 5vmin;
+    overflow: hidden;
 }
 
 .game-status{
     font-size: 5vmin;
+    margin-top: 5vmin;
 }
 
 .gameBoard{
