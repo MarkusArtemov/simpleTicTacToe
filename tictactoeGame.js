@@ -3,7 +3,7 @@ document.querySelector('.restart-button').addEventListener("click", function() {
   location.reload()
 });
 let xTurn = true;
-const winningCombinations = [ [0, 1, 2],[3, 4, 5],[6, 7, 8], 
+const winningCombinations =   [[0, 1, 2],[3, 4, 5],[6, 7, 8], 
                               [0, 3, 6],[1, 4, 7],[2, 5, 8],  
                               [0, 4, 8],[2, 4, 6]];        
 boxes.forEach(box => {
@@ -19,11 +19,11 @@ boxes.forEach(box => {
 function showPopup() {
   document.querySelector('.popup-container').style.display = "flex";
   document.querySelector('.endgame-message').textContent = checkWin() ? (xTurn ? "X hat gewonnen" : "O hat gewonnen") : ("unentschieden");
- 
 }
 
 function changeTurn() {
   xTurn = !xTurn;
+  document.querySelector('.game-status').textContent = xTurn ? "X-Turn" : "0-Turn";
 }
 
 function checkDraw() {
